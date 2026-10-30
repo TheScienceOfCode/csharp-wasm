@@ -1,0 +1,14 @@
+{
+  "name": "csharp-wasm",
+  "private": true,
+  "type": "module",
+  "description": "C# compiler and runner in the browser (Roslyn on .NET WebAssembly, via WasmSharp), built as a static module for The Science of Code lessons.",
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@wasmsharp/core": "0.10.0",
+    "@wasmsharp/vite-plugin": "0.10.0",
+    "vite": "6.4.5"
+  }
+}
