@@ -11,7 +11,7 @@ const result = await runner.run('Console.WriteLine("Hola");');
 // {success, stdOut, stdErr, diagnostics}
 ```
 
-- Descarga única de ~40 MB (el navegador la guarda en caché). Se ejecuta en el hilo principal: cárgalo dentro de un iframe desechable.
+- Sin dependencias externas en tiempo de ejecución (no usa el modo worker ni Comlink). Descarga única de ~40 MB (el navegador la guarda en caché). Se ejecuta en el hilo principal: cárgalo dentro de un iframe desechable.
 - Reconstruir: `npm install && npm run build` (genera `docs/`).
 - Las versiones están fijadas (`@wasmsharp/core` 0.10.0, `vite` 6.4.5).
 

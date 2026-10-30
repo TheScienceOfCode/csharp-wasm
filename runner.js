@@ -7,15 +7,17 @@
 //
 // The compiler runs on the page's main thread (no web worker), so a runaway program freezes whatever
 // hosts it: load it inside a disposable iframe and discard the iframe on timeout.
-import { WasmSharpModule } from "@wasmsharp/core";
+// WasmSharpWorker is imported by path: the package entry (WasmCompiler) also pulls Comlink from unpkg at runtime,
+// which is only needed for the web-worker mode that this runner does not use.
+import { WasmSharpWorker } from "./node_modules/@wasmsharp/core/WasmSharpWorker.js";
 
 const PREAMBLE = "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n";
 
 export async function init({ onProgress } = {}) {
-  const module = await WasmSharpModule.initializeAsync({
-    disableWebWorker: true,
-    onDownloadResourceProgress: (loaded, total) => onProgress?.(loaded, total),
-  });
+  const module = await WasmSharpWorker.initializeAsync(
+    {},
+    { onDownloadResourceProgress: (loaded, total) => onProgress?.(loaded, total) },
+  );
   return {
     /** Compiles and runs a C# program (top-level statements allowed). Common usings are added. */
     async run(code) {
